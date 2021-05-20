@@ -6,7 +6,7 @@ const { addUser, removeUser, getUsersInRoom } = require("./users");
 const { addMessage, getMessagesInRoom } = require("./messages");
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -55,8 +55,6 @@ io.on("connection", (socket) => {
     socket.leave(roomId);
   });
 });
-
-
 
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
